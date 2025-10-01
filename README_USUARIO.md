@@ -19,11 +19,13 @@ Para que o programa funcione, seu computador **obrigatoriamente** precisa ter os
 Siga os passos abaixo para preparar o programa para o primeiro uso.
 
 #### Passo 1: Baixar o Projeto
+
 1.  Na página do projeto no GitHub, clique no botão verde **`< > Code`**.
 2.  Selecione a opção **`Download ZIP`**.
-3.  Salve o arquivo e **descompacte a pasta** em um local de fácil acesso no seu computador (por exemplo, na sua Área de Trabalho ou em `C:\Ferramentas\`).
+3.  Salve o arquivo e **descompacte a pasta** em um local de fácil acesso no seu computador (por exemplo, na sua Área de Trabalho).
 
 #### Passo 2: Acessar a Pasta do Projeto via Terminal
+
 1.  Abra o terminal do seu sistema operacional.
     * **Windows:** Pesquise por `cmd` ou `PowerShell` no Menu Iniciar.
     * **macOS/Linux:** Pesquise por `Terminal`.
@@ -38,6 +40,7 @@ Siga os passos abaixo para preparar o programa para o primeiro uso.
         ```
 
 #### Passo 3: Instalar as Dependências do Projeto
+
 Com o terminal aberto na pasta correta, execute os três comandos abaixo, **um de cada vez**, na ordem exata.
 
 1.  **Crie o ambiente virtual** (uma "caixa" isolada para as bibliotecas do projeto):
@@ -71,21 +74,28 @@ Pronto! A configuração está concluída.
 Agora que tudo está instalado, o uso é simples.
 
 #### Passo 1: Prepare seus Arquivos
-* Crie uma pasta em qualquer lugar do seu computador e coloque nela todos os PDFs que deseja processar.
+
+Crie uma pasta em qualquer lugar do seu computador e coloque nela todos os PDFs que deseja processar.
 
 #### Passo 2: Execute o Programa
+
 1.  Abra um novo terminal e navegue novamente até a pasta do projeto (usando o comando `cd`).
 2.  **Ative o ambiente virtual** (passo essencial toda vez que for usar):
-    ```powershell
-    # No Windows
-    .\venv\Scripts\Activate.ps1
-    ```
+    * No **Windows**:
+        ```powershell
+        .\venv\Scripts\Activate.ps1
+        ```
+    * No **macOS/Linux**:
+        ```bash
+        source venv/bin/activate
+        ```
 3.  Execute o script com o comando abaixo, **substituindo o caminho de exemplo pelo caminho real da sua pasta de PDFs**:
     ```powershell
     python processador_cli.py "C:\Users\SeuUsuario\Desktop\Comprovantes_Outubro"
     ```
 
 #### Passo 3: Encontre os Resultados
+
 * O terminal mostrará um relatório completo do processamento.
 * Os arquivos renomeados e um arquivo `.zip` com tudo dentro estarão na pasta de saída (por padrão, `pdfs_renomeados`, dentro da pasta do projeto).
 
@@ -110,4 +120,5 @@ A alteração é feita diretamente no **comando que você digita**, como mostrad
     ```powershell
     python processador_cli.py "C:\Caminho\De\Entrada" -o "C:\Caminho\De\Saida"
     ```
+
 Desta forma, o mesmo script pode ser usado para processar arquivos de qualquer pasta, em qualquer computador, sem nenhuma modificação.
