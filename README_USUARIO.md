@@ -1,6 +1,6 @@
 # Guia de Utilização via Terminal
 
-Este documento detalha como configurar e utilizar a ferramenta de renomeação de PDFs diretamente pelo terminal do seu computador (Prompt de Comando, PowerShell, Terminal do macOS/Linux, etc.).
+Este documento detalha como configurar e utilizar a ferramenta de renomeação de PDFs diretamente pelo terminal do seu computador.
 
 ## Parte 1: Pré-requisitos Essenciais
 
@@ -10,7 +10,7 @@ Para que o programa funcione, seu computador **obrigatoriamente** precisa ter os
 * **Tesseract OCR**
 * **Poppler**
 
-> **Atenção:** Este guia assume que os programas acima já estão instalados. A instalação destes softwares não é coberta por este documento. Se ocorrerem erros, verifique primeiro a instalação e a configuração destes pré-requisitos.
+> **Atenção:** Este guia assume que os programas acima já estão instalados. A instalação destes softwares não é coberta por este documento. Se ocorrerem erros durante o uso, a causa mais provável é a ausência ou má configuração de um desses pré-requisitos.
 
 ---
 
@@ -19,31 +19,22 @@ Para que o programa funcione, seu computador **obrigatoriamente** precisa ter os
 Siga os passos abaixo para preparar o programa para o primeiro uso.
 
 #### Passo 1: Baixar o Projeto
-
 1.  Na página do projeto no GitHub, clique no botão verde **`< > Code`**.
 2.  Selecione a opção **`Download ZIP`**.
 3.  Salve o arquivo e **descompacte a pasta** em um local de fácil acesso no seu computador (por exemplo, na sua Área de Trabalho).
 
 #### Passo 2: Acessar a Pasta do Projeto via Terminal
-
-1.  Abra o terminal do seu sistema operacional.
-    * **Windows:** Pesquise por `cmd` ou `PowerShell` no Menu Iniciar.
-    * **macOS/Linux:** Pesquise por `Terminal`.
+1.  Abra o terminal do seu sistema operacional (ex: `PowerShell` no Windows).
 2.  Use o comando `cd` (change directory) para navegar até a pasta que você descompactou.
     * *Exemplo para Windows:*
         ```powershell
         cd C:\Users\SeuUsuario\Desktop\processador-pdf-python-main
         ```
-    * *Exemplo para macOS/Linux:*
-        ```bash
-        cd /Users/SeuUsuario/Desktop/processador-pdf-python-main
-        ```
 
 #### Passo 3: Instalar as Dependências do Projeto
-
 Com o terminal aberto na pasta correta, execute os três comandos abaixo, **um de cada vez**, na ordem exata.
 
-1.  **Crie o ambiente virtual** (uma "caixa" isolada para as bibliotecas do projeto):
+1.  **Crie o ambiente virtual:**
     ```
     python -m venv venv
     ```
@@ -63,7 +54,7 @@ Com o terminal aberto na pasta correta, execute os três comandos abaixo, **um d
     ```
     pip install -r requirements.txt
     ```
-    * *Aguarde a conclusão da instalação. Isso pode levar alguns minutos.*
+    * *Aguarde a conclusão da instalação.*
 
 Pronto! A configuração está concluída.
 
@@ -71,54 +62,38 @@ Pronto! A configuração está concluída.
 
 ## Parte 3: Como Usar no Dia a Dia
 
-Agora que tudo está instalado, o uso é simples.
+Depois que a configuração inicial foi feita, o uso diário se resume a seguir os 3 passos abaixo.
 
-#### Passo 1: Prepare seus Arquivos
+### Os 3 Comandos Para Executar (Resumo Rápido)
 
-Crie uma pasta em qualquer lugar do seu computador e coloque nela todos os PDFs que deseja processar.
+Toda vez que você for usar o programa, abra o terminal e siga estes três passos:
 
-#### Passo 2: Execute o Programa
+**1. Navegue até a pasta do projeto:**
+*(Substitua pelo caminho real da sua pasta)*
+```powershell
+cd C:\Caminho\Para\Sua\Pasta\DoProjeto
+```
 
-1.  Abra um novo terminal e navegue novamente até a pasta do projeto (usando o comando `cd`).
-2.  **Ative o ambiente virtual** (passo essencial toda vez que for usar):
-    * No **Windows**:
-        ```powershell
-        .\venv\Scripts\Activate.ps1
-        ```
-    * No **macOS/Linux**:
-        ```bash
-        source venv/bin/activate
-        ```
-3.  Execute o script com o comando abaixo, **substituindo o caminho de exemplo pelo caminho real da sua pasta de PDFs**:
-    ```powershell
-    python processador_cli.py "C:\Users\SeuUsuario\Desktop\Comprovantes_Outubro"
-    ```
+**2. Ative o ambiente virtual:**
+*(O `(venv)` deve aparecer no início da linha)*
+```powershell
+.\venv\Scripts\Activate.ps1
+```
 
-#### Passo 3: Encontre os Resultados
-
-* O terminal mostrará um relatório completo do processamento.
-* Os arquivos renomeados e um arquivo `.zip` com tudo dentro estarão na pasta de saída (por padrão, `pdfs_renomeados`, dentro da pasta do projeto).
+**3. Execute o processamento:**
+*(Este comando processa tudo o que está na pasta `meus_pdfs`)*
+```powershell
+python processador_cli.py "meus_pdfs"
+```
 
 ---
+### Detalhes do Processo
 
-## Importante: Você Não Precisa Editar o Código!
+#### Passo 1: Adicionar os PDFs
+* Antes de executar os comandos acima, coloque todos os seus arquivos PDF (sejam eles de uma ou várias páginas) dentro da pasta **`meus_pdfs`**, que já existe no projeto.
 
-Uma grande vantagem desta ferramenta é que o código-fonte é universal. **Você nunca precisará abrir os arquivos `.py` para alterar caminhos de pastas.**
+#### Passo 2: Executar os Comandos
+* Siga o "Resumo Rápido" de 3 comandos mostrado acima. O terminal mostrará um relatório completo do processamento.
 
-Pense no script como um GPS: você não modifica o aparelho por dentro para ir a um novo lugar, você apenas digita o endereço na tela. Aqui, o **Terminal é a sua tela**, e os caminhos das pastas são os "endereços" que você informa na hora de usar.
-
-A alteração é feita diretamente no **comando que você digita**, como mostrado abaixo:
-
-* **Para informar onde estão seus PDFs (obrigatório):**
-    A primeira parte do comando é sempre o caminho para a pasta com os arquivos originais.
-    ```powershell
-    python processador_cli.py "C:\Caminho\DA\PASTA\COM\PDFs"
-    ```
-
-* **Para informar onde salvar os resultados (opcional):**
-    Se você quiser salvar os arquivos em um local específico, use o indicador `-o` (`--output`) seguido do caminho da pasta de destino.
-    ```powershell
-    python processador_cli.py "C:\Caminho\De\Entrada" -o "C:\Caminho\De\Saida"
-    ```
-
-Desta forma, o mesmo script pode ser usado para processar arquivos de qualquer pasta, em qualquer computador, sem nenhuma modificação.
+#### Passo 3: Encontrar os Resultados
+* Seus arquivos finais, já fatiados e renomeados, estarão na pasta **`pdfs_renomeados`**.
