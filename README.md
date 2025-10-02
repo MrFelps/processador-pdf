@@ -4,7 +4,7 @@
 ![Python](https://img.shields.io/badge/Python-3.9+-brightgreen.svg)
 ![Licença](https://img.shields.io/badge/Licen%C3%A7a-MIT-green.svg)
 
-Ferramenta de linha de comando (CLI) desenvolvida em Python para automatizar a extração do número de AIT (número de compromisso) de comprovantes de pagamento do Banco Santander.
+Ferramenta de linha de comando (CLI) desenvolvida em Python para automatizar a extração e renomeação de comprovantes de pagamento, focada especificamente no layout do **Banco Santander**.
 
 ## Sobre o Projeto
 
@@ -16,9 +16,10 @@ Esta ferramenta de linha de comando foi criada para ser a solução: um script r
 
 ## Funcionalidades Principais
 
+* **Fatiamento Automático de PDFs:** Processa arquivos com múltiplas páginas, separando cada página em um documento individual antes da análise.
 * **Extração Híbrida:** Utiliza PyMuPDF para texto digital e Tesseract (via OCR) para PDFs baseados em imagem.
 * **Lógica Específica:** As regras de busca são otimizadas para encontrar o "número de compromisso cliente" no padrão dos comprovantes do Santander.
-* **Processamento em Lote:** Renomeia múltiplos arquivos de uma só vez.
+* **Processamento em Lote:** Analisa uma pasta inteira contendo múltiplos arquivos PDF de uma só vez.
 * **Interface de Terminal (CLI):** Permite o uso flexível com qualquer pasta de entrada e saída através de argumentos de linha de comando.
 * **Relatório Detalhado:** Exibe um resumo da execução, informando sucessos e falhas.
 
@@ -58,43 +59,19 @@ Este projeto foi construído com base em uma arquitetura e lógica concebidas po
 
 ## Uso da Ferramenta
 
-Execute o script `processador_cli.py` a partir do terminal. A principal instrução que você deve fornecer é o caminho para a pasta que contém os PDFs a serem processados.
+Execute o script `processador_cli.py` a partir do terminal, passando o caminho da pasta de entrada como argumento.
 
-### Comando Básico
-
-Este comando processa os PDFs de uma pasta de entrada e salva os resultados em um diretório padrão chamado `pdfs_renomeados`.
-
-**Formato:**
+**Comando Básico** (salva os resultados na pasta padrão `pdfs_renomeados`):
 ```powershell
-python processador_cli.py "CAMINHO_PARA_SUA_PASTA_DE_PDFS"
+python processador_cli.py "C:\Caminho\Para\Seus\Comprovantes"
 ```
 
-**Explicação:**
-Você **deve substituir** `"CAMINHO_PARA_SUA_PASTA_DE_PDFS"` pelo caminho real da pasta em seu computador.
-
-**Exemplo Prático:**
-Se seus comprovantes estão em uma pasta chamada `Comprovantes_Outubro` na sua Área de Trabalho, o comando no Windows seria:
+**Especificando uma Pasta de Saída:**
 ```powershell
-python processador_cli.py "C:\Users\SeuNome\Desktop\Comprovantes_Outubro"
+python processador_cli.py "C:\Caminho\De\Entrada" -o "C:\Caminho\De\Saida"
 ```
 
-### Especificando uma Pasta de Saída (Opcional)
-
-Use o indicador `-o` (ou `--output`) para definir um local específico para salvar os arquivos processados.
-
-**Formato:**
-```powershell
-python processador_cli.py "CAMINHO_DE_ENTRADA" -o "CAMINHO_DE_SAIDA"
-```
-
-**Exemplo Prático:**
-```powershell
-python processador_cli.py "C:\Users\SeuNome\Desktop\Comprovantes_Outubro" -o "C:\Documentos\Relatorios\Outubro_Processado"
-```
-
-### Ver Ajuda
-
-Para ver todas as opções disponíveis, use o argumento `-h`.
+**Ver Ajuda:**
 ```powershell
 python processador_cli.py -h
 ```
@@ -103,6 +80,5 @@ python processador_cli.py -h
 
 O código é separado em dois módulos para melhor organização:
 
-* `core.py`: Contém a classe `PDFCompromissoExtractor`, que é o "motor" com toda a lógica de extração e processamento dos arquivos.
+* `core.py`: Contém a classe `PDFCompromissoExtractor`, que é o "motor" com toda a lógica de extração, fatiamento e processamento dos arquivos.
 * `processador_cli.py`: Responsável pela interface com o usuário via linha de comando (usando `argparse`) e por orquestrar a execução.
-* 
