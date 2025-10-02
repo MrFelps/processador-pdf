@@ -1,18 +1,19 @@
-# Arquivo: processador_cli.py (VERSÃO FINAL COM LÓGICA DE FATIAMENTO)
+# Arquivo: processador_cli.py (VERSÃO FINAL - PROCESSAMENTO EM LOTE COM FATIAMENTO)
 import argparse
 from core import PDFCompromissoExtractor
 
 def main():
     """
-    Função principal que orquestra o processo de fatiar e renomear.
+    Função principal que orquestra o processo.
     """
     parser = argparse.ArgumentParser(
-        description="Fatia um PDF de múltiplas páginas e renomeia cada página com base no número de compromisso."
+        description="Processa todos os PDFs de uma pasta, fatiando-os em páginas e renomeando cada uma."
     )
+    # VOLTAMOS A ACEITAR UM DIRETÓRIO DE ENTRADA
     parser.add_argument(
-        "input_file", 
+        "input_dir", 
         type=str, 
-        help="O caminho para o arquivo PDF único com várias páginas a ser processado."
+        help="O caminho para a pasta contendo os arquivos PDF a serem processados."
     )
     parser.add_argument(
         "-o", "--output", 
@@ -26,19 +27,15 @@ def main():
     extractor = PDFCompromissoExtractor(output_dir=args.output)
     
     try:
-        # 1. Fatia o PDF principal em vários PDFs de uma página
-        split_pdf_paths = extractor.split_pdf(args.input_file)
+        # 1. Chama a nova função principal que lida com o diretório
+        extractor.process_directory(args.input_dir)
         
-        if split_pdf_paths:
-            # 2. Processa a lista de PDFs fatiados para renomeá-los
-            extractor.process_multiple_pdfs(split_pdf_paths)
-        
-        # 3. Gera o relatório final
+        # 2. Gera o relatório final
         report = extractor.generate_report()
         print(report)
     
     finally:
-        # 4. Limpa a pasta temporária, aconteça o que acontecer
+        # 3. Limpa a pasta temporária, aconteça o que acontecer
         extractor.cleanup_temp_dir()
 
     print("\n🎯 PROCESSAMENTO CONCLUÍDO!")
