@@ -8,7 +8,7 @@ Ferramenta de linha de comando (CLI) desenvolvida em Python para automatizar a e
 
 ## Sobre o Projeto
 
-Em muitos fluxos de trabalho, tarefas aparentemente pequenas consomem um tempo valioso. A renomeação manual de dezenas de **comprovantes de pagamento do Banco Santander** é um desses processos. Um funcionário pode levar um período considerável do seu dia abrindo cada PDF para encontrar o **"número de A/T" (número de compromisso)** e usar esse código para renomear o arquivo.
+Em muitos fluxos de trabalho, tarefas aparentemente pequenas consomem um tempo valioso. A renomeação manual de dezenas de **comprovantes de pagamento do Banco Santander** é um desses processos. Um funcionário pode levar um período considerável do seu dia abrindo cada PDF para encontrar o **"número de AIT" (número de compromisso)** e usar esse código para renomear o arquivo.
 
 A ideia deste projeto é simples: **eliminar completamente esse trabalho manual**. Mesmo que a automação salve "apenas" alguns minutos por dia, o ganho acumulado em produtividade e a redução de erros representam uma diferença significativa no final do mês.
 
